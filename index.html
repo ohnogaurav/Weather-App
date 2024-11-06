@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
+    <title>Tapasvini: Your weather forecast partner</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Weather App</h1>
+        <h1>Tapasvini</h1>
         <input type="text" id="city" placeholder="Enter city name" required>
         <button onclick="getWeather()">Get Weather</button>
         <div id="weather-info"></div>
@@ -25,6 +25,7 @@
                 const data = await response.json();
                 
                 if (response.ok) {
+                    const weatherCondition = data.weather[0].main.toLowerCase();
                     const weatherInfo = `
                         <h2>Weather in ${data.name}</h2>
                         <p>Temperature: ${data.main.temp}°C</p>
@@ -32,12 +33,50 @@
                         <p>Condition: ${data.weather[0].description}</p>
                     `;
                     document.getElementById("weather-info").innerHTML = weatherInfo;
+
+                    // Change background image based on weather condition
+                    changeBackground(weatherCondition);
                 } else {
                     throw new Error(data.message || "City not found");
                 }
             } catch (error) {
                 document.getElementById("weather-info").innerHTML = `<p class="error">${error.message}</p>`;
             }
+        }
+
+        function changeBackground(condition) {
+            const body = document.body;
+
+            switch (condition) {
+                case 'clear':
+                    body.style.backgroundImage = "url('clear.jpg')";
+                    break;
+                case 'mist':
+                    body.style.backgroundImage = "url('mist.jpg')";
+                    break;
+                case 'fog':
+                    body.style.backgroundImage = "url('fog.jpg')";
+                    break;
+                case 'rain':
+                    body.style.backgroundImage = "url('rain.jpg')";
+                    break;
+                case 'haze':
+                    body.style.backgroundImage = "url('haze.jpg')";
+                    break;
+                case 'scattered clouds':
+                    body.style.backgroundImage = "url('clouds.jpg')";
+                    break;
+                case 'smoke':
+                    body.style.backgroundImage = "url('smoke.jpg')";
+                    break;
+                default:
+                    body.style.backgroundImage = "url('default.jpg')";
+            }
+
+            // Ensure the background covers the full viewport
+            body.style.backgroundSize = "cover";
+            body.style.backgroundPosition = "center";
+            body.style.backgroundRepeat = "no-repeat";
         }
     </script>
 </body>
