@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: rgba(6, 52, 145, 0.486);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,13 +12,13 @@ body {
     text-align: center;
     padding: 20px;
     width: 300px;
-    background: #fff;
+    background: rgb(108, 108, 193);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
-    color: #333;
+    color: #ffffff;
 }
 
 input[type="text"] {
